@@ -6,5 +6,7 @@ namespace InventoryMerge.Gameplay.Services {
         public event Action<Vector2> OnTapStarted;
         public event Action<Vector2> OnTapEnded;
         public event Action OnTapCanceled;
+
+        public event Action<Vector2> OnTouchPositionChanged;
     }
 }
