@@ -77,7 +77,7 @@ namespace InventoryMerge.Editor.PropertyDrawers {
                 return slot;
             }
             
-            slot.RegisterCallback<ClickEvent>((evt) => OnSlotClicked(evt, valueProperty));
+            slot.RegisterCallback<ClickEvent, SerializedProperty>(OnSlotClicked, valueProperty);
             var value = valueProperty.boxedValue as InventorySlotDataSpawnInfo;
             var isAvailable = value.State == InventorySlotState.Available;
             
