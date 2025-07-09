@@ -9,6 +9,7 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         [SerializeField] private Transform _itemPlace;
         [SerializeField] private Color _freeSlotColor;
         [SerializeField] private Color _occupiedSlotColor;
+        [SerializeField] private Color _disabledSlotColor;
         
         private readonly CompositeDisposable _disposables = new();
         
@@ -24,7 +25,13 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
 
         public void BindData(IInventorySlotData data) {
             _data = data;
-            _data.Item.Subscribe(SlotItemUpdated).AddTo(_disposables);
+
+            if (_data.State == InventorySlotState.Available) {
+                _data.Item.Subscribe(SlotItemUpdated).AddTo(_disposables);
+            }
+            else {
+                _image.color = _disabledSlotColor;
+            }
         }
 
         private void OnDestroy() {
@@ -38,6 +45,9 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         }
 
         private void SlotItemUpdated(IInventoryItemData item) {
+            if (_data.State != InventorySlotState.Available) {
+                return;
+            }
             _image.color = item == null ? _freeSlotColor : _occupiedSlotColor;
         }
     }

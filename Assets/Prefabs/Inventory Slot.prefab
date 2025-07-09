@@ -125,5 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.Gameplay.Views.InventorySlotView
   _image: {fileID: 6528494320143551080}
+  _itemPlace: {fileID: 0}
   _freeSlotColor: {r: 0.5264151, g: 1, b: 0.5282723, a: 1}
   _occupiedSlotColor: {r: 1, g: 0.4433962, b: 0.4433962, a: 1}
+  _disabledSlotColor: {r: 1, g: 1, b: 1, a: 0}
