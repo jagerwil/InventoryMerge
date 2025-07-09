@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using InventoryMerge.Utils.Data;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace InventoryMerge.Gameplay.Data.Implementations {
