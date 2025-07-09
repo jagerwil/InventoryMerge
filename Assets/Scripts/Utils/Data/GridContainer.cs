@@ -13,8 +13,8 @@ namespace InventoryMerge.Utils.Data {
             Size = size;
             Debug.Log($"Initialize {GetType().Name}: Size {size}");
             
-            for (int x = 0; x < Size.x; x++) {
-                for (int y = 0; y < Size.y; y++) {
+            for (int y = 0; y < Size.y; y++) {
+                for (int x = 0; x < Size.x; x++) {
                     _elements.Add(CreateElement(new Vector2Int(x, y)));
                 }
             }

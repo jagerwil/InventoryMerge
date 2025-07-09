@@ -11,6 +11,7 @@ namespace InventoryMerge.Gameplay.Views {
         private void Awake() {
             var dataContainer = new InventorySlotsDataContainer(_size);
             Data = new InventoryItemData(dataContainer);
+            dataContainer.SetItem(Data);
         }
     }
 }

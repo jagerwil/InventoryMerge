@@ -10,6 +10,12 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
             Initialize(size);
         }
         
+        public void SetItem(IInventoryItemData item) {
+            foreach (var slot in GetSlots()) {
+                slot.SetItem(item);
+            }
+        }
+        
         protected override InventorySlotData CreateElement(Vector2Int index) {
             return new InventorySlotData(index);
         }

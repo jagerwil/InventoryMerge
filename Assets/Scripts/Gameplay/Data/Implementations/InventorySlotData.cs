@@ -15,7 +15,9 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
         }
 
         public void SetItem(IInventoryItemData item) {
-            _item.Value = item;
+            if (State == InventorySlotState.Available) {
+                _item.Value = item;
+            }
         }
     }
 }

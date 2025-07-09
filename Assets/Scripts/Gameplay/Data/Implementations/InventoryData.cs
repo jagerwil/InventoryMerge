@@ -26,7 +26,7 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
             var hasAnyItemSlots = false;
             
             foreach (var slot in _container.GetElements()) {
-                if (slot.Item == item) {
+                if (slot.Item.CurrentValue == item) {
                     slot.SetItem(null);
                     hasAnyItemSlots = true;
                 }
