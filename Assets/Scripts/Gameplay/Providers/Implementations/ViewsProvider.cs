@@ -1,7 +1,7 @@
 using InventoryMerge.Gameplay.Views.Inventory;
 using UnityEngine;
 
-namespace InventoryMerge.Gameplay.Providers {
+namespace InventoryMerge.Gameplay.Providers.Implementations {
     public class ViewsProvider : IViewsProvider {
         public InventoryView InventoryView { get; private set; }
         public ItemsHolderView ItemsHolderView { get; private set; }

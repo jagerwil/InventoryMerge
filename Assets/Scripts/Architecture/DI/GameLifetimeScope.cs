@@ -1,5 +1,6 @@
 using InventoryMerge.Architecture.StateMachine;
 using InventoryMerge.Gameplay.Providers;
+using InventoryMerge.Gameplay.Providers.Implementations;
 using InventoryMerge.Gameplay.Services;
 using InventoryMerge.Gameplay.Services.Implementations;
 using InventoryMerge.Gameplay.Views.Inventory;

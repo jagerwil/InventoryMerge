@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InventoryMerge.Gameplay.Providers {
+namespace InventoryMerge.Gameplay.Providers.Implementations {
     public class CameraProvider : ICameraProvider {
         private Camera _camera;
 

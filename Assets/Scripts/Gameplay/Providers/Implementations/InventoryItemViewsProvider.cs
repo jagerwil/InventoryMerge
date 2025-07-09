@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Views.Inventory;
 
-namespace InventoryMerge.Gameplay.Providers {
+namespace InventoryMerge.Gameplay.Providers.Implementations {
     public class InventoryItemViewsProvider : IInventoryItemViewsProvider {
         private Dictionary<IInventoryItemData, InventoryItemView> _itemViews = new();
         
