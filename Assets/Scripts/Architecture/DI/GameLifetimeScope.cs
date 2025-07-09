@@ -24,6 +24,7 @@ namespace InventoryMerge.Architecture.DI {
             //Register providers
             builder.Register<ICameraProvider, CameraProvider>(Lifetime.Singleton);
             builder.RegisterInstance<IViewsProvider>(new ViewsProvider(_inventoryView, _itemsHolderView, _defaultItemsRoot));
+            builder.Register<IInventoryItemViewsProvider, InventoryItemViewsProvider>(Lifetime.Singleton);
             
             //Register services
             builder.Register<IInputService, InputService>(Lifetime.Singleton);

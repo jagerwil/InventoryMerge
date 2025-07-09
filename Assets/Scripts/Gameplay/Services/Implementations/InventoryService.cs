@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Data.Implementations;
 using InventoryMerge.SObjects.Configs;
@@ -20,9 +21,9 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             return _inventoryData.CanFitItem(item, startingIndex);
         }
 
-        public bool TryFitItem(IInventoryItemData item, Vector2 lerpSlotIndex) {
+        public bool TryFitItem(IInventoryItemData item, Vector2 lerpSlotIndex, out IEnumerable<IInventoryItemData> removedItems) {
             var startingIndex = GetStartingIndex(item, lerpSlotIndex);
-            return _inventoryData.TryFitItem(item, startingIndex);
+            return _inventoryData.TryFitItem(item, startingIndex, out removedItems);
         }
 
         public bool TryRemoveItem(IInventoryItemData item) {

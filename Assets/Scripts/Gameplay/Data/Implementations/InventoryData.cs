@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace InventoryMerge.Gameplay.Data.Implementations {
@@ -18,8 +19,8 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
             return _container.CanFit(item.Container, startingIndex);
         }
 
-        public bool TryFitItem(IInventoryItemData item, Vector2Int startingIndex) {
-            return _container.TryFit(item.Container, startingIndex);
+        public bool TryFitItem(IInventoryItemData item, Vector2Int startingIndex, out IEnumerable<IInventoryItemData> removedItems) {
+            return _container.TryFit(item.Container, startingIndex, out removedItems);
         }
 
         public bool TryRemoveItem(IInventoryItemData item) {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace InventoryMerge.Gameplay.Data {
@@ -9,6 +10,6 @@ namespace InventoryMerge.Gameplay.Data {
         public IEnumerable<IInventorySlotData> GetSlots();
         
         public bool CanFit(IInventorySlotsDataContainer other, Vector2Int startingIndex);
-        public bool TryFit(IInventorySlotsDataContainer other, Vector2Int startingIndex);
+        public bool TryFit(IInventorySlotsDataContainer other, Vector2Int startingIndex, out IEnumerable<IInventoryItemData> removedItems);
     }
 }

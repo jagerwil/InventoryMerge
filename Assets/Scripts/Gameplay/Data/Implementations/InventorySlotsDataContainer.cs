@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using InventoryMerge.Utils.Data;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace InventoryMerge.Gameplay.Data.Implementations {
     [Serializable]
     public class InventorySlotsDataContainer : GridContainer<InventorySlotData>, IInventorySlotsDataContainer {
+        private List<IInventoryItemData> _emptyList = new();
+        
         public InventorySlotsDataContainer(Vector2Int size) {
             Initialize(size);
         }
@@ -41,20 +45,21 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
                 var slotIndex = slot.Index + startingIndex;
                 var localSlot = GetSlot(slotIndex);
 
-                if (localSlot.State != InventorySlotState.Available
-                    || localSlot.Item.CurrentValue != null) {
+                if (localSlot.State != InventorySlotState.Available) {
                     return false;
                 }
             }
 
             return true;
         }
-        
-        public bool TryFit(IInventorySlotsDataContainer other, Vector2Int startingIndex) {
+
+        public bool TryFit(IInventorySlotsDataContainer other, Vector2Int startingIndex, out IEnumerable<IInventoryItemData> removedItems) {
             if (!CanFit(other, startingIndex)) {
+                removedItems = _emptyList;
                 return false;
             }
 
+            var removedItemsHashSet = new HashSet<IInventoryItemData>();
             foreach (var slot in other.GetSlots()) {
                 if (slot.State != InventorySlotState.Available) {
                     continue;
@@ -62,10 +67,26 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
                 
                 var slotIndex = slot.Index + startingIndex;
                 var localSlot = GetSlot(slotIndex);
+
+                if (localSlot.Item.CurrentValue != null && localSlot.Item.CurrentValue != slot.Item.CurrentValue) {
+                    removedItemsHashSet.Add(localSlot.Item.CurrentValue);
+                }
+
                 localSlot.SetItem(slot.Item.CurrentValue);
             }
 
+            removedItems = removedItemsHashSet;
+            RemoveItems(removedItems);
+
             return true;
+        }
+
+        private void RemoveItems(IEnumerable<IInventoryItemData> items) {
+            foreach (var slot in GetSlots()) {
+                if (items.Contains(slot.Item.CurrentValue)) {
+                    slot.SetItem(null);
+                }
+            }
         }
     }
 }

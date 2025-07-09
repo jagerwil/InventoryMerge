@@ -6,12 +6,15 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
     public class InventoryItemTransferService : IInventoryItemTransferService {
         private readonly IInventoryService _inventoryService;
         private readonly IViewsProvider _viewsProvider;
+        private readonly IInventoryItemViewsProvider _itemViewsProvider;
 
         public InventoryItemTransferService(
             IInventoryService inventoryService,
-            IViewsProvider viewsProvider) {
+            IViewsProvider viewsProvider,
+            IInventoryItemViewsProvider itemViewsProvider) {
             _inventoryService = inventoryService;
             _viewsProvider = viewsProvider;
+            _itemViewsProvider = itemViewsProvider;
         }
 
         public bool TryAttachToInventory(InventoryItemView item, Vector2 lerpSlotIndex) {
@@ -21,9 +24,16 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             roundedSlotIndex.x = RoundItemCenterIndex(lerpSlotIndex.x, itemCenterIndex.x);
             roundedSlotIndex.y = RoundItemCenterIndex(lerpSlotIndex.y, itemCenterIndex.y);
 
-            if (!_inventoryService.TryFitItem(item.Data, roundedSlotIndex)) {
+            if (!_inventoryService.TryFitItem(item.Data, roundedSlotIndex, out var removedItems)) {
                 Debug.Log($"[ItemTransfer] ITEM NOT FIT! item size: {item.Data.Container.Size}, position: {roundedSlotIndex}");
                 return false;
+            }
+
+            foreach (var removedItem in removedItems) {
+                var itemView = _itemViewsProvider.GetItemView(removedItem);
+                if (itemView) {
+                    AttachToHolder(itemView);
+                }
             }
 
             var inventoryView = _viewsProvider.InventoryView;

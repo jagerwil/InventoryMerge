@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using InventoryMerge.Gameplay.Data;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace InventoryMerge.Gameplay.Services {
         public IReadOnlyInventoryData Data { get; }
         
         public bool CanFitItem(IInventoryItemData item, Vector2 lerpSlotIndex);
-        public bool TryFitItem(IInventoryItemData item, Vector2 lerpSlotIndex);
+        public bool TryFitItem(IInventoryItemData item, Vector2 lerpSlotIndex, out IEnumerable<IInventoryItemData> removedItems);
 
         public bool TryRemoveItem(IInventoryItemData item);
     }
