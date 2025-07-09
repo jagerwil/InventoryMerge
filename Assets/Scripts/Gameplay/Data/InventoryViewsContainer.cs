@@ -17,10 +17,10 @@ namespace InventoryMerge.Gameplay.Data {
             _prefab = prefab;
             _itemsRoot = itemsRoot;
             
-            Initialize(data.Size);
+            Initialize(data.Size, CreateElement);
         }
 
-        protected override InventorySlotView CreateElement(Vector2Int index) {
+        private InventorySlotView CreateElement(Vector2Int index) {
             var view = Object.Instantiate(_prefab, _itemsRoot);
             view.BindData(_data.GetSlot(index));
             return view;

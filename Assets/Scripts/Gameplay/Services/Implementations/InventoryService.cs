@@ -13,7 +13,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
 
         [Inject]
         public InventoryService(InventoryConfig config) {
-            _inventoryData = new InventoryData(config.Size);
+            _inventoryData = new InventoryData(config.DataContainer);
         }
 
         public bool CanFitItem(IInventoryItemData item, Vector2 lerpSlotIndex) {

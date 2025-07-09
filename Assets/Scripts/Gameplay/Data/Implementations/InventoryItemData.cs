@@ -13,10 +13,11 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
         public IInventorySlotsDataContainer Container { get; private set; }
         public Vector2 CenterIndex { get; private set; }
 
-        public InventoryItemData(InventoryItemId id, int level, IInventorySlotsDataContainer container) {
+        public InventoryItemData(InventoryItemId id, int level, InventorySlotsDataContainer container) {
             Id = id;
             _level.Value = level;
             Container = container;
+            Container.SetItem(this);
             
             CenterIndex = (container.Size - Vector2.one) * 0.5f;
         }

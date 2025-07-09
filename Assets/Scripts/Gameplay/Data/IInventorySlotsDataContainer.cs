@@ -5,6 +5,8 @@ namespace InventoryMerge.Gameplay.Data {
     public interface IInventorySlotsDataContainer {
         public Vector2Int Size { get; }
 
+        public void SetItem(IInventoryItemData item);
+
         public IInventorySlotData GetSlot(Vector2Int index);
         public IEnumerable<IInventorySlotData> GetSlots();
         

@@ -18,7 +18,6 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         public void Initialize(IInventoryItemData data) {
             Data = data;
             data.Level.Subscribe(LevelUpdated).AddTo(_disposables);
-            LevelUpdated(Data.Level.CurrentValue);
         }
 
         private void OnDestroy() {
@@ -26,7 +25,6 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         }
 
         private void LevelUpdated(int newLevel) {
-            Debug.Log($"Level updated for item {Data.Id}!");
             var sprite = _itemsDatabase.GetItemLevelSprite(Data.Id, newLevel);
             if (sprite) {
                 _image.sprite = sprite;

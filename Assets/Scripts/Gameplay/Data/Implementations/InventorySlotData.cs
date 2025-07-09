@@ -9,9 +9,9 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
         public InventorySlotState State { get; private set; }
         public ReadOnlyReactiveProperty<IInventoryItemData> Item => _item;
 
-        public InventorySlotData(Vector2Int index) {
+        public InventorySlotData(Vector2Int index, InventorySlotState state) {
             Index = index;
-            State = InventorySlotState.Available;
+            State = state;
         }
 
         public void SetItem(IInventoryItemData item) {

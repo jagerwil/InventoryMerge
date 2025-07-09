@@ -16,7 +16,6 @@ namespace InventoryMerge.Gameplay.Factories {
 
         [Inject]
         public InventoryItemViewFactory(IInventoryItemTransferService itemTransferService, InventoryItemsDatabase itemsDatabase) {
-            Debug.Log("Inject!");
             _itemTransferService = itemTransferService;
             _itemsDatabase = itemsDatabase;
         }

@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace InventoryMerge.Utils.Data {
-    [Serializable]
     public abstract class GridContainer<T> : IGridContainer<T> where T : class {
         protected List<T> _elements = new();
         
         public Vector2Int Size { get; private set; }
 
-        protected void Initialize(Vector2Int size) {
+        protected void Initialize(Vector2Int size, Func<Vector2Int, T> createElementFunc) {
             Size = size;
             Debug.Log($"Initialize {GetType().Name}: Size {size}");
             
             for (int y = 0; y < Size.y; y++) {
                 for (int x = 0; x < Size.x; x++) {
-                    _elements.Add(CreateElement(new Vector2Int(x, y)));
+                    _elements.Add(createElementFunc(new Vector2Int(x, y)));
                 }
             }
         }
@@ -28,11 +27,13 @@ namespace InventoryMerge.Utils.Data {
             if (_elements.Count < Size.x * Size.y) {
                 return null;
             }
-            return _elements[x + y * Size.x];
+            return _elements[GetInternalIndex(x, y)];
         }
 
         public IEnumerable<T> GetElements() => _elements;
 
-        protected abstract T CreateElement(Vector2Int index);
+        protected int GetInternalIndex(int x, int y) {
+            return x + y * Size.x;
+        }
     }
 }

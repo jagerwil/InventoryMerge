@@ -29,9 +29,6 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         }
 
         private void TouchPositionChanged(Vector2 touchPosition) {
-            if (_objects.Count > 0) {
-                Debug.Log("Objects are moving bruv");
-            }
             foreach (var obj in _objects) {
                 obj.position = touchPosition;
             }

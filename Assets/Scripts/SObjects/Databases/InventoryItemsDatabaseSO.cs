@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Data.Implementations;
 using InventoryMerge.Gameplay.Views.Inventory;
+using InventoryMerge.SObjects.Configs;
 using InventoryMerge.Utils.Data;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -50,10 +51,10 @@ namespace InventoryMerge.SObjects.Databases {
     public class InventoryItemInfo {
         [field: SerializeField] public InventoryItemId ItemId { get; private set; }
         [field: SerializeField] public InventoryItemView Prefab { get; private set; }
-        [SerializeField] private InventorySlotsDataContainer _itemSlots;
+        [SerializeField] private InventorySlotsDataContainerSpawnInfo _spawnInfo;
         [SerializeField] private List<InventoryItemLevelsInfo> _levels;
         
-        public IInventorySlotsDataContainer ItemSlots => _itemSlots;
+        public InventorySlotsDataContainer ItemSlots => _spawnInfo.GetOrCreateInstance();
         public IReadOnlyList<InventoryItemLevelsInfo> Levels => _levels;
     }
 

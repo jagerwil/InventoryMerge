@@ -7,8 +7,8 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
 
         public Vector2Int Size => _container.Size;
 
-        public InventoryData(Vector2Int size) {
-            _container = new InventorySlotsDataContainer(size);
+        public InventoryData(InventorySlotsDataContainer container) {
+            _container = container;
         }
 
         public InventorySlotData GetSlot(Vector2Int index) {

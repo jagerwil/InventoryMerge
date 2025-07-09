@@ -16,10 +16,26 @@ MonoBehaviour:
     _items:
     - <ItemId>k__BackingField: 0
       <Prefab>k__BackingField: {fileID: 7865815002842739910, guid: d765abcbe6530284d84ad1e941943e8f, type: 3}
+      _spawnInfo:
+        _size: {x: 1, y: 1}
+        _slots:
+        - <State>k__BackingField: 0
       _levels: []
     - <ItemId>k__BackingField: 1
       <Prefab>k__BackingField: {fileID: 3568465763683086238, guid: e29dd4ac4d8363946948468b5d3b6411, type: 3}
+      _spawnInfo:
+        _size: {x: 2, y: 1}
+        _slots:
+        - <State>k__BackingField: 0
+        - <State>k__BackingField: 0
       _levels: []
     - <ItemId>k__BackingField: 2
       <Prefab>k__BackingField: {fileID: 5556929468547607367, guid: 79a040330332cbb43aec6c87c22b7255, type: 3}
+      _spawnInfo:
+        _size: {x: 2, y: 2}
+        _slots:
+        - <State>k__BackingField: 0
+        - <State>k__BackingField: 0
+        - <State>k__BackingField: 0
+        - <State>k__BackingField: 0
       _levels: []

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InventoryMerge.SObjects.Configs;
 using InventoryMerge.Utils.Data;
 using UnityEngine;
 
@@ -9,18 +10,24 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
     public class InventorySlotsDataContainer : GridContainer<InventorySlotData>, IInventorySlotsDataContainer {
         private List<IInventoryItemData> _emptyList = new();
         
-        public InventorySlotsDataContainer(Vector2Int size) {
-            Initialize(size);
+        public InventorySlotsDataContainer(Vector2Int size, List<InventorySlotDataSpawnInfo> slots) {
+            var spawnedSlotsCount = size.x * size.y;
+            if (spawnedSlotsCount != slots.Count) {
+                Debug.LogError($"{GetType().Name}(): Spawn Info slots: \"{slots.Count}\" != spawned slots: \"{spawnedSlotsCount}\"");
+                return;
+            }
+
+            Initialize(size, (index => {
+                var internalIndex = GetInternalIndex(index.x, index.y);
+                var spawnInfo = slots[internalIndex];
+                return new InventorySlotData(index, spawnInfo.State);
+            }));
         }
         
         public void SetItem(IInventoryItemData item) {
             foreach (var slot in GetSlots()) {
                 slot.SetItem(item);
             }
-        }
-        
-        protected override InventorySlotData CreateElement(Vector2Int index) {
-            return new InventorySlotData(index);
         }
 
         public IInventorySlotData GetSlot(Vector2Int index) => GetElement(index);

@@ -13,7 +13,18 @@ MonoBehaviour:
   m_Name: Game Config
   m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.SObjects.GameConfig
   <Inventory>k__BackingField:
-    <Size>k__BackingField: {x: 3, y: 3}
+    _spawnInfo:
+      _size: {x: 3, y: 3}
+      _slots:
+      - <State>k__BackingField: 1
+      - <State>k__BackingField: 0
+      - <State>k__BackingField: 1
+      - <State>k__BackingField: 0
+      - <State>k__BackingField: 1
+      - <State>k__BackingField: 0
+      - <State>k__BackingField: 1
+      - <State>k__BackingField: 0
+      - <State>k__BackingField: 1
   <ItemsSpawning>k__BackingField:
     _items:
     - <Id>k__BackingField: 0
