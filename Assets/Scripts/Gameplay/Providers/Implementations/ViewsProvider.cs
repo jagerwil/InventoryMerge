@@ -7,7 +7,7 @@ namespace InventoryMerge.Gameplay.Providers.Implementations {
         public ItemsHolderView ItemsHolderView { get; private set; }
         public Transform DefaultItemsRoot { get; private set; }
 
-        public ViewsProvider(InventoryView inventoryView, ItemsHolderView itemsHolderView, Transform defaultItemsRoot) {
+        public void Setup(InventoryView inventoryView, ItemsHolderView itemsHolderView, Transform defaultItemsRoot) {
             InventoryView = inventoryView;
             ItemsHolderView = itemsHolderView;
             DefaultItemsRoot = defaultItemsRoot;

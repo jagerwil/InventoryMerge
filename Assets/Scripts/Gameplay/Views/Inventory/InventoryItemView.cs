@@ -1,27 +1,36 @@
 using InventoryMerge.Gameplay.Data;
-using InventoryMerge.Gameplay.Data.Implementations;
-using InventoryMerge.Gameplay.Providers;
+using InventoryMerge.SObjects.Databases;
+using R3;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 namespace InventoryMerge.Gameplay.Views.Inventory {
     public class InventoryItemView : MonoBehaviour {
-        [SerializeField] private InventoryItemId _id;
-        [SerializeField] private int _level;
-        [SerializeField] private Vector2Int _size;
+        private readonly CompositeDisposable _disposables = new();
         
-        [Inject] private IInventoryItemViewsProvider _itemsProvider;
+        [SerializeField] private Image _image;
         
+        [Inject] private InventoryItemsDatabase _itemsDatabase;
+
         public IInventoryItemData Data { get; private set; }
 
-        private void Awake() {
-            var dataContainer = new InventorySlotsDataContainer(_size);
-            Data = new InventoryItemData(_id, _level, dataContainer);
-            dataContainer.SetItem(Data);
+        public void Initialize(IInventoryItemData data) {
+            Data = data;
+            data.Level.Subscribe(LevelUpdated).AddTo(_disposables);
+            LevelUpdated(Data.Level.CurrentValue);
         }
 
-        private void Start() {
-            _itemsProvider.Register(this);
+        private void OnDestroy() {
+            _disposables?.Dispose();
+        }
+
+        private void LevelUpdated(int newLevel) {
+            Debug.Log($"Level updated for item {Data.Id}!");
+            var sprite = _itemsDatabase.GetItemLevelSprite(Data.Id, newLevel);
+            if (sprite) {
+                _image.sprite = sprite;
+            }
         }
     }
 }

@@ -1,20 +1,17 @@
 using UnityEngine;
 
-namespace InventoryMerge.Utils.Extensions {
-    public static class RectTransformExtensions
-    {
-        public static Rect GetWorldRect(this RectTransform rectTransform)
-        {
-            Vector3[] corners = new Vector3[4];
-            rectTransform.GetWorldCorners(corners);
-            // Get the bottom left corner.
-            Vector3 position = corners[0];
+//Got from https://discussions.unity.com/t/convert-recttransform-rect-to-rect-world/153391/3
+public static class RectTransformExtensions {
+    public static Rect GetWorldRect(this RectTransform rectTransform) {
+        var corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+        // Get the bottom left corner.
+        var position = corners[0];
         
-            Vector2 size = new Vector2(
-                rectTransform.lossyScale.x * rectTransform.rect.size.x,
-                rectTransform.lossyScale.y * rectTransform.rect.size.y);
+        var size = new Vector2(
+            rectTransform.lossyScale.x * rectTransform.rect.size.x,
+            rectTransform.lossyScale.y * rectTransform.rect.size.y);
 
-            return new Rect(position, size);
-        }
+        return new Rect(position, size);
     }
 }

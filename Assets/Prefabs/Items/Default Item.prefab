@@ -88,4 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ca6ae0a09ec1f4eaf100934fa6f6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.Gameplay.Views.InventoryItemView
-  _size: {x: 1, y: 1}
+  _image: {fileID: 1320001800877800542}

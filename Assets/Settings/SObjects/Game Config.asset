@@ -14,3 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.SObjects.GameConfig
   <Inventory>k__BackingField:
     <Size>k__BackingField: {x: 3, y: 3}
+  <ItemsSpawning>k__BackingField:
+    _items:
+    - <Id>k__BackingField: 0
+      <Level>k__BackingField: 0
+    - <Id>k__BackingField: 1
+      <Level>k__BackingField: 0
+    - <Id>k__BackingField: 2
+      <Level>k__BackingField: 0
+  <ItemsDatabase>k__BackingField: {fileID: 11400000, guid: 35acaa73edf6eaa48a57130a20c7d0e4, type: 2}

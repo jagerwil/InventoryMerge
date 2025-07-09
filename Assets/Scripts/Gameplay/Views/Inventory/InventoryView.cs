@@ -1,5 +1,4 @@
 using InventoryMerge.Gameplay.Data;
-using InventoryMerge.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 

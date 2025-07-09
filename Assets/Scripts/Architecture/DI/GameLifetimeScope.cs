@@ -1,4 +1,5 @@
 using InventoryMerge.Architecture.StateMachine;
+using InventoryMerge.Gameplay.Factories;
 using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Providers.Implementations;
 using InventoryMerge.Gameplay.Services;
@@ -11,20 +12,21 @@ using VContainer.Unity;
 
 namespace InventoryMerge.Architecture.DI {
     public class GameLifetimeScope : LifetimeScope {
-        [Header("Views")]
-        [SerializeField] private InventoryView _inventoryView;
-        [SerializeField] private ItemsHolderView _itemsHolderView;
-        [SerializeField] private Transform _defaultItemsRoot;
         [Header("Configs")]
-        [SerializeField] private GameConfig _config;
+        [SerializeField] private GameConfigSO _config;
 
         protected override void Configure(IContainerBuilder builder) {
-            //Register configs
+            //Register configs & databases
             builder.RegisterInstance(_config.Inventory);
+            builder.RegisterInstance(_config.ItemsSpawning);
+            builder.RegisterInstance(_config.ItemsDatabase.Data);
+            
+            //Register factories
+            builder.Register<IInventoryItemViewFactory, InventoryItemViewFactory>(Lifetime.Singleton);
             
             //Register providers
             builder.Register<ICameraProvider, CameraProvider>(Lifetime.Singleton);
-            builder.RegisterInstance<IViewsProvider>(new ViewsProvider(_inventoryView, _itemsHolderView, _defaultItemsRoot));
+            builder.Register<IViewsProvider, ViewsProvider>(Lifetime.Singleton);
             builder.Register<IInventoryItemViewsProvider, InventoryItemViewsProvider>(Lifetime.Singleton);
             
             //Register services

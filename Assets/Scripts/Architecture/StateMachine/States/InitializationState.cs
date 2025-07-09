@@ -4,10 +4,10 @@ using VContainer;
 
 namespace InventoryMerge.Architecture.StateMachine.States {
     public class InitializationState : IState {
-        private readonly IGameStateMachine _stateMachine;
+        private IGameStateMachine _stateMachine;
         
         [Inject]
-        public InitializationState(IGameStateMachine stateMachine, IInventoryDragDropService dragDropService) {
+        private void Inject(IGameStateMachine stateMachine, IInventoryDragDropService dragDropService) {
             _stateMachine = stateMachine;
         }
         
