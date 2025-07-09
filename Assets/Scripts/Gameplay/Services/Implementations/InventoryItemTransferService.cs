@@ -1,5 +1,5 @@
 using InventoryMerge.Gameplay.Providers;
-using InventoryMerge.Gameplay.Views;
+using InventoryMerge.Gameplay.Views.Inventory;
 using UnityEngine;
 
 namespace InventoryMerge.Gameplay.Services.Implementations {
@@ -23,7 +23,6 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
 
             if (!_inventoryService.TryFitItem(item.Data, roundedSlotIndex)) {
                 Debug.Log($"[ItemTransfer] ITEM NOT FIT! item size: {item.Data.Container.Size}, position: {roundedSlotIndex}");
-
                 return false;
             }
 
@@ -32,12 +31,18 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             return true;
         }
 
+        public void AttachToHolder(InventoryItemView item) {
+            _viewsProvider.ItemsHolderView.PlaceItem(item);
+        }
+
         public bool TryDetachFromCurrentPlacement(InventoryItemView item) {
             if (!item) {
                 return false;
             }
-            
-            return _inventoryService.TryRemoveItem(item.Data);
+
+            item.transform.SetParent(_viewsProvider.DefaultItemsRoot);
+            _inventoryService.TryRemoveItem(item.Data);
+            return true;
         }
 
         private float RoundItemCenterIndex(float lerpIndex, float itemCenterIndex) {

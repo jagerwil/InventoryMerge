@@ -2,7 +2,7 @@ using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Data.Implementations;
 using UnityEngine;
 
-namespace InventoryMerge.Gameplay.Views {
+namespace InventoryMerge.Gameplay.Views.Inventory {
     public class InventoryItemView : MonoBehaviour {
         [SerializeField] private Vector2Int _size;
         

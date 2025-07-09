@@ -1,5 +1,5 @@
 using System;
-using InventoryMerge.Gameplay.Views;
+using InventoryMerge.Gameplay.Views.Inventory;
 using InventoryMerge.Utils.UI;
 using UnityEngine;
 using VContainer;
@@ -32,33 +32,31 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         }
 
         private void TapStarted(Vector2 touchPosition) {
-            Debug.Log("[DragDrop] Tap started!");
             _selectedItem = UiRaycaster.RaycastFirst<InventoryItemView>(touchPosition);
             if (_selectedItem) {
-                Debug.Log("[DragDrop] Tap started with a selected item, wowee");
                 _itemTransferService.TryDetachFromCurrentPlacement(_selectedItem);
                 _moveUiWithTouchService.Attach(_selectedItem.transform);
             }
         }
 
         private void TapEnded(Vector2 touchPosition) {
-            Debug.Log("[DragDrop] Tap ended");
             if (!_selectedItem) {
                 return;
             }
             
             var slot = UiRaycaster.RaycastAny<InventorySlotView>(touchPosition);
             if (!slot) {
-                Debug.Log("[DragDrop] Tap ended with no slot in sight, sadge...");
                 _moveUiWithTouchService.Detach(_selectedItem.transform);
+                _itemTransferService.AttachToHolder(_selectedItem);
                 _selectedItem = null;
                 return;
             }
             
             var slotOffset = slot.GetCenterOffsetRatio(touchPosition);
             _moveUiWithTouchService.Detach(_selectedItem.transform);
-            Debug.Log($"[DragDrop] Attaching item to inventory! Slot index: {slot.Index}, slotOffset: {slotOffset}");
-            _itemTransferService.TryAttachToInventory(_selectedItem, slot.Index + slotOffset);
+            if (!_itemTransferService.TryAttachToInventory(_selectedItem, slot.Index + slotOffset)) {
+                _itemTransferService.AttachToHolder(_selectedItem);
+            }
             _selectedItem = null;
         }
 

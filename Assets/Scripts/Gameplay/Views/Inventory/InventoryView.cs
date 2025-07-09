@@ -3,7 +3,7 @@ using InventoryMerge.Utils.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InventoryMerge.Gameplay.Views {
+namespace InventoryMerge.Gameplay.Views.Inventory {
     public class InventoryView : MonoBehaviour {
         [SerializeField] private GridLayoutGroup _gridLayout;
         [SerializeField] private RectTransform _objectsRoot;

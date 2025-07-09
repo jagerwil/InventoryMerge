@@ -1,13 +1,13 @@
-using System;
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Utils.Extensions;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InventoryMerge.Gameplay.Views {
+namespace InventoryMerge.Gameplay.Views.Inventory {
     public class InventorySlotView : MonoBehaviour {
         [SerializeField] private Image _image;
+        [SerializeField] private Transform _itemPlace;
         [SerializeField] private Color _freeSlotColor;
         [SerializeField] private Color _occupiedSlotColor;
         
@@ -17,6 +17,7 @@ namespace InventoryMerge.Gameplay.Views {
         private IInventorySlotData _data;
         
         public Vector2Int Index => _data?.Index ?? Vector2Int.one * -1;
+        public Transform ItemPlace => _itemPlace;
 
         private void Awake() {
             _rectTransform = transform as RectTransform;
@@ -25,7 +26,6 @@ namespace InventoryMerge.Gameplay.Views {
         public void BindData(IInventorySlotData data) {
             _data = data;
             _data.Item.Subscribe(SlotItemUpdated).AddTo(_disposables);
-            SlotItemUpdated(_data.Item.CurrentValue);
         }
 
         private void OnDestroy() {

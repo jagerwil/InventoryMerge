@@ -1,5 +1,6 @@
 using System;
 using InventoryMerge.Gameplay.Views;
+using InventoryMerge.Gameplay.Views.Inventory;
 using InventoryMerge.Utils.Data;
 using UnityEngine;
 using Object = UnityEngine.Object;
