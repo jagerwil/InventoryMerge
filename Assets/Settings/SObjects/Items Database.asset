@@ -20,7 +20,13 @@ MonoBehaviour:
         _size: {x: 1, y: 1}
         _slots:
         - <State>k__BackingField: 0
-      _levels: []
+      _levels:
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 0.27704516, g: 0.8792453, b: 0.38401538, a: 1}
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 0.26981127, g: 0.3879921, b: 1, a: 1}
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 1, g: 0.6960126, b: 0.19999999, a: 1}
     - <ItemId>k__BackingField: 1
       <Prefab>k__BackingField: {fileID: 3568465763683086238, guid: e29dd4ac4d8363946948468b5d3b6411, type: 3}
       _spawnInfo:
@@ -28,7 +34,13 @@ MonoBehaviour:
         _slots:
         - <State>k__BackingField: 0
         - <State>k__BackingField: 0
-      _levels: []
+      _levels:
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 0.2784314, g: 0.8784314, b: 0.38431373, a: 1}
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 0.27058825, g: 0.3882353, b: 1, a: 1}
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 1, g: 0.69411767, b: 0.2, a: 1}
     - <ItemId>k__BackingField: 2
       <Prefab>k__BackingField: {fileID: 5556929468547607367, guid: 79a040330332cbb43aec6c87c22b7255, type: 3}
       _spawnInfo:
@@ -38,4 +50,10 @@ MonoBehaviour:
         - <State>k__BackingField: 0
         - <State>k__BackingField: 0
         - <State>k__BackingField: 0
-      _levels: []
+      _levels:
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 0.2784314, g: 0.8784314, b: 0.38431373, a: 1}
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 0.27058825, g: 0.3882353, b: 1, a: 1}
+      - <Sprite>k__BackingField: {fileID: 0}
+        <Color>k__BackingField: {r: 1, g: 0.69411767, b: 0.2, a: 1}

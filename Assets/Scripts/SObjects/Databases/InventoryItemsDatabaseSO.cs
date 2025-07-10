@@ -32,18 +32,18 @@ namespace InventoryMerge.SObjects.Databases {
         }
 
         [CanBeNull]
-        public Sprite GetItemLevelSprite(InventoryItemId id, int level) {
+        public InventoryItemLevelInfo GetItemLevelInfo(InventoryItemId id, int level) {
             var itemInfo = GetItemInfo(id);
             if (itemInfo == null) {
                 return null;
             }
             
             if (level < 0 || level >= itemInfo.Levels.Count) {
-                Debug.LogError($"{GetType().Name}.{nameof(GetItemLevelSprite)}(): Cannot find sprite for level {level}");
+                Debug.LogError($"{GetType().Name}.{nameof(GetItemLevelInfo)}(): Cannot find info for level {level}");
                 return null;
             }
 
-            return itemInfo.Levels[level].Sprite;
+            return itemInfo.Levels[level];
         }
     }
 
@@ -52,15 +52,16 @@ namespace InventoryMerge.SObjects.Databases {
         [field: SerializeField] public InventoryItemId ItemId { get; private set; }
         [field: SerializeField] public InventoryItemView Prefab { get; private set; }
         [SerializeField] private InventorySlotsDataContainerSpawnInfo _spawnInfo;
-        [SerializeField] private List<InventoryItemLevelsInfo> _levels;
+        [SerializeField] private List<InventoryItemLevelInfo> _levels;
         
         public InventorySlotsDataContainer ItemSlots => _spawnInfo.CreateInstance();
-        public IReadOnlyList<InventoryItemLevelsInfo> Levels => _levels;
+        public IReadOnlyList<InventoryItemLevelInfo> Levels => _levels;
     }
 
     [Serializable]
-    public class InventoryItemLevelsInfo {
+    public class InventoryItemLevelInfo {
         [field: SerializeField] public Sprite Sprite { get; private set; }
+        [field: SerializeField] public Color Color { get; private set; } = Color.white;
         //You can put the item stats in here
     }
 }

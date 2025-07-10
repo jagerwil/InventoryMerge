@@ -26,9 +26,14 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         }
 
         private void LevelUpdated(int newLevel) {
-            var sprite = _itemsDatabase.GetItemLevelSprite(Data.Id, newLevel);
-            if (sprite) {
-                _image.sprite = sprite;
+            var levelInfo = _itemsDatabase.GetItemLevelInfo(Data.Id, newLevel);
+            if (levelInfo == null) {
+                return;
+            }
+
+            _image.color = levelInfo.Color;
+            if (levelInfo.Sprite) {
+                _image.sprite = levelInfo.Sprite;
             }
         }
     }
