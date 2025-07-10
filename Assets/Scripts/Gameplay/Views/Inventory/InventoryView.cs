@@ -27,8 +27,7 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         public void ShowItemPlacedPreview(IInventoryItemData item, Vector2Int startingSlot) {
             var endSlot = item.GetEndIndex(startingSlot);
             foreach (var slotView in _viewsContainer.GetElements()) {
-                var isAffected = slotView.Index.IsInRange(startingSlot, endSlot);
-                if (!isAffected) {
+                if (!IsSlotAffected(slotView, item, startingSlot, endSlot)) {
                     slotView.ShowPreview(PreviewSlotViewState.Unaffected);
                     continue;
                 }
@@ -41,7 +40,7 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         public void ShowItemNotFitPreview(IInventoryItemData item, Vector2Int startingSlot) {
             var endSlot = item.GetEndIndex(startingSlot);
             foreach (var slotView in _viewsContainer.GetElements()) {
-                var isAffected = slotView.Index.IsInRange(startingSlot, endSlot);
+                var isAffected = IsSlotAffected(slotView, item, startingSlot, endSlot);
                 slotView.ShowPreview(isAffected ? PreviewSlotViewState.DoesNotFitItem : PreviewSlotViewState.Unaffected);
             }
         }
@@ -61,6 +60,15 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
             var xCoord = firstSlotPosition.x + slotSize.x * approxIndex.x + Mathf.Floor(approxIndex.x) * spacing.x;
             var yCoord = firstSlotPosition.y + slotSize.y * approxIndex.y + Mathf.Floor(approxIndex.y) * spacing.y;
             return new Vector2(xCoord, yCoord);
+        }
+
+        private bool IsSlotAffected(InventorySlotView slotView, IInventoryItemData item, Vector2Int startingSlot, Vector2Int endSlot) {
+            if (!slotView.Index.IsInRange(startingSlot, endSlot)) {
+                return false;
+            }
+            
+            var itemSlot = item.Container.GetSlot(slotView.Index - startingSlot);
+            return itemSlot.State == InventorySlotState.Available;
         }
     }
 }
