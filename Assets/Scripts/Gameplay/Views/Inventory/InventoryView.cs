@@ -52,12 +52,13 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
         }
 
         public Vector2 GetSlotPosition(Vector2 approxIndex) {
-            var slotSize = _gridLayout.cellSize;
-            var spacing = _gridLayout.spacing;
+            var scale = transform.lossyScale;
+            var slotSize = _gridLayout.cellSize * scale;
+            var spacing = _gridLayout.spacing * scale;
             var rect = _objectsRoot.GetWorldRect();
             
             var firstSlotPosition = rect.min + slotSize * 0.5f;
-            var xCoord = firstSlotPosition.x + slotSize.x * approxIndex.x + Mathf.Floor(approxIndex.x) * spacing.x;
+            var xCoord = firstSlotPosition.x + (slotSize.x * approxIndex.x + Mathf.Floor(approxIndex.x) * spacing.x);
             var yCoord = firstSlotPosition.y + slotSize.y * approxIndex.y + Mathf.Floor(approxIndex.y) * spacing.y;
             return new Vector2(xCoord, yCoord);
         }

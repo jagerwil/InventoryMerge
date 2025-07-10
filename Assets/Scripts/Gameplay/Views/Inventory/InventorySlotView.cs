@@ -5,7 +5,6 @@ using UnityEngine.UI;
 namespace InventoryMerge.Gameplay.Views.Inventory {
     public class InventorySlotView : MonoBehaviour {
         [SerializeField] private Image _image;
-        [SerializeField] private Transform _itemPlace;
         [SerializeField] private InventorySlotViewColorChanger _colorChanger;
 
         private RectTransform _rectTransform;
@@ -13,8 +12,6 @@ namespace InventoryMerge.Gameplay.Views.Inventory {
 
         public Vector2Int Index => _data?.Index ?? Vector2Int.one * -1;
         public IInventoryItemData Item => _data.Item.CurrentValue;
-        
-        public Transform ItemPlace => _itemPlace;
 
         protected bool IsSlotAvailable => _data.State == InventorySlotState.Available;
 
