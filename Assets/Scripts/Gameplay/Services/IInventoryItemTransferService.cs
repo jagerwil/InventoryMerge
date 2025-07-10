@@ -1,4 +1,5 @@
 using InventoryMerge.Gameplay.Views.Inventory;
+using InventoryMerge.Gameplay.Views.Items;
 using UnityEngine;
 
 namespace InventoryMerge.Gameplay.Services {

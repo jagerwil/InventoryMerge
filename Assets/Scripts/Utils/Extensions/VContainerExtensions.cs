@@ -1,5 +1,6 @@
 using VContainer;
 
+// ReSharper disable once CheckNamespace
 public static class VContainerExtensions {
     public static T InjectNewObject<T>(this IObjectResolver objectResolver) where T : new() {
         T obj = new();

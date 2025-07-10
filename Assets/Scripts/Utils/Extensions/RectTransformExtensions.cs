@@ -1,6 +1,7 @@
 using UnityEngine;
 
 //Got from https://discussions.unity.com/t/convert-recttransform-rect-to-rect-world/153391/3
+// ReSharper disable once CheckNamespace
 public static class RectTransformExtensions {
     public static Rect GetWorldRect(this RectTransform rectTransform) {
         var corners = new Vector3[4];

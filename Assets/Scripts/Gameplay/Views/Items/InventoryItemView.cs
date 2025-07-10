@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
-namespace InventoryMerge.Gameplay.Views.Inventory {
+namespace InventoryMerge.Gameplay.Views.Items {
     public class InventoryItemView : MonoPoolObject {
         private readonly CompositeDisposable _disposables = new();
         

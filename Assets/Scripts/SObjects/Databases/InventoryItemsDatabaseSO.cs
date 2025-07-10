@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Data.Implementations;
 using InventoryMerge.Gameplay.Views.Inventory;
+using InventoryMerge.Gameplay.Views.Items;
 using InventoryMerge.SObjects.Configs;
 using InventoryMerge.Utils.Data;
 using JetBrains.Annotations;

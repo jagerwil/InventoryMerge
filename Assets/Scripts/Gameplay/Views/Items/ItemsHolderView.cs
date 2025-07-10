@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace InventoryMerge.Gameplay.Views.Inventory {
+namespace InventoryMerge.Gameplay.Views.Items {
     public class ItemsHolderView : MonoBehaviour {
         [SerializeField] private Transform _itemsRoot;
         

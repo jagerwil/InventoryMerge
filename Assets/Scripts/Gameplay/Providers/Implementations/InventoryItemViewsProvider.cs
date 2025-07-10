@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Views.Inventory;
+using InventoryMerge.Gameplay.Views.Items;
 
 namespace InventoryMerge.Gameplay.Providers.Implementations {
     public class InventoryItemViewsProvider : IInventoryItemViewsProvider {

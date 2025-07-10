@@ -2,6 +2,7 @@ using System;
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Views.Inventory;
+using InventoryMerge.Gameplay.Views.Items;
 using InventoryMerge.Utils.UI;
 using UnityEngine;
 using VContainer;

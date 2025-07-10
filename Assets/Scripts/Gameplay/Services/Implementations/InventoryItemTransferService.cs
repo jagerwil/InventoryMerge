@@ -1,5 +1,6 @@
 using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Views.Inventory;
+using InventoryMerge.Gameplay.Views.Items;
 using UnityEngine;
 using VContainer;
 

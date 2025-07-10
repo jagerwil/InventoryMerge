@@ -3,6 +3,7 @@ using InventoryMerge.Gameplay.Data.Implementations;
 using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Services;
 using InventoryMerge.Gameplay.Views.Inventory;
+using InventoryMerge.Gameplay.Views.Items;
 using InventoryMerge.SObjects.Databases;
 using InventoryMerge.Utils.ObjectPool;
 using UnityEngine;
