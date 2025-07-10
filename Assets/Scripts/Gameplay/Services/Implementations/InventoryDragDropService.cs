@@ -10,7 +10,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         private readonly IInputService _inputService;
         private readonly IInventoryItemTransferService _itemTransferService;
         private readonly IMoveUiWithTouchService _moveUiWithTouchService;
-        
+
         private InventoryItemView _selectedItem;
         
         [Inject]
@@ -40,10 +40,13 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
 
         private void TapStarted(Vector2 touchPosition) {
             _selectedItem = UiRaycaster.RaycastFirst<InventoryItemView>(touchPosition);
-            if (_selectedItem) {
-                _itemTransferService.TryDetachFromCurrentPlacement(_selectedItem);
-                _moveUiWithTouchService.Attach(_selectedItem.transform);
+            if (!_selectedItem) {
+                return;
             }
+            
+            _itemTransferService.TryDetachFromCurrentPlacement(_selectedItem);
+            _itemTransferService.AttachToDragDrop(_selectedItem);
+            _moveUiWithTouchService.Attach(_selectedItem.transform);
         }
 
         private void TapEnded(Vector2 touchPosition) {

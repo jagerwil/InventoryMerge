@@ -11,7 +11,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
     public class InventoryPreviewService : IInventoryPreviewService, IDisposable {
         private readonly IInputService _inputService;
         private readonly IInventoryService _inventoryService;
-        private readonly IViewsProvider _viewsProvider;
+        private readonly IInventoryViewProvider _inventoryViewProvider;
         
         private InventoryItemView _selectedItem;
         private InventorySlotView _selectedSlot;
@@ -22,10 +22,10 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         public InventoryPreviewService(
             IInputService inputService,
             IInventoryService inventoryService,
-            IViewsProvider viewsProvider) {
+            IInventoryViewProvider inventoryViewProvider) {
             _inputService = inputService;
             _inventoryService = inventoryService;
-            _viewsProvider = viewsProvider;
+            _inventoryViewProvider = inventoryViewProvider;
 
         }
 
@@ -92,14 +92,14 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                 return;
             }
             
-            _viewsProvider.InventoryView.StopPreview();
+            _inventoryViewProvider.InventoryView.StopPreview();
             _isPreviewing = false;
         }
         
         public void StartPreview(IInventoryItemData item, Vector2 approxSlotIndex, IInventoryItemData targetItem) {
             var result = _inventoryService.GetItemPlacementResult(item, approxSlotIndex);
 
-            var inventoryView = _viewsProvider.InventoryView;
+            var inventoryView = _inventoryViewProvider.InventoryView;
             switch (result) {
                 case InventoryItemPlacementResultType.PlaceItem:
                     inventoryView.ShowItemPlacedPreview(item, item.GetStartIndex(approxSlotIndex));

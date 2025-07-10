@@ -1,5 +1,4 @@
 using InventoryMerge.Gameplay.Providers;
-using InventoryMerge.Gameplay.Views.Inventory;
 using InventoryMerge.Gameplay.Views.Items;
 using UnityEngine;
 using VContainer;
@@ -7,17 +6,31 @@ using VContainer;
 namespace InventoryMerge.Gameplay.Services.Implementations {
     public class InventoryItemTransferService : IInventoryItemTransferService {
         private readonly IInventoryService _inventoryService;
-        private readonly IViewsProvider _viewsProvider;
+        private readonly IInventoryViewProvider _inventoryViewProvider;
         private readonly IInventoryItemViewsProvider _itemViewsProvider;
+
+        private Transform _defaultItemsRoot;
+        private Transform _itemsHolderRoot;
+        private Transform _dragDropItemsRoot;
 
         [Inject]
         public InventoryItemTransferService(
             IInventoryService inventoryService,
-            IViewsProvider viewsProvider,
+            IInventoryViewProvider inventoryViewProvider,
             IInventoryItemViewsProvider itemViewsProvider) {
             _inventoryService = inventoryService;
-            _viewsProvider = viewsProvider;
+            _inventoryViewProvider = inventoryViewProvider;
             _itemViewsProvider = itemViewsProvider;
+        }
+
+        public void Setup(Transform defaultItemsRoot, Transform itemsHolderRoot, Transform dragDropItemsRoot) {
+            _defaultItemsRoot = defaultItemsRoot;
+            _itemsHolderRoot = itemsHolderRoot;
+            _dragDropItemsRoot = dragDropItemsRoot;
+        }
+
+        public void AttachToDragDrop(InventoryItemView item) {
+            item.transform.SetParent(_dragDropItemsRoot);
         }
 
         public bool TryAttachToInventory(InventoryItemView item, Vector2 approxSlotIndex) {
@@ -43,13 +56,14 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                 }
             }
 
-            var inventoryView = _viewsProvider.InventoryView;
+            var inventoryView = _inventoryViewProvider.InventoryView;
             item.transform.position = inventoryView.GetSlotPosition(roundedSlotIndex);
             return true;
         }
 
         public void AttachToHolder(InventoryItemView item) {
-            _viewsProvider.ItemsHolderView.PlaceItem(item);
+            item.transform.SetParent(_itemsHolderRoot);
+            item.transform.localPosition = Vector3.zero;
         }
 
         public bool TryDetachFromCurrentPlacement(InventoryItemView item) {
@@ -57,7 +71,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                 return false;
             }
 
-            item.transform.SetParent(_viewsProvider.DefaultItemsRoot);
+            item.transform.SetParent(_defaultItemsRoot);
             _inventoryService.TryRemoveItem(item.Data);
             return true;
         }

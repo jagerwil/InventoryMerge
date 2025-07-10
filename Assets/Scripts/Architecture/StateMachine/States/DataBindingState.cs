@@ -6,20 +6,20 @@ namespace InventoryMerge.Architecture.StateMachine.States {
     public class DataBindingState : IState {
         private IGameStateMachine _stateMachine;
         private IInventoryService _inventoryService;
-        private IViewsProvider _viewsProvider;
+        private IInventoryViewProvider _inventoryViewProvider;
         
         [Inject]
         private void Inject(
             IGameStateMachine stateMachine, 
             IInventoryService inventoryService, 
-            IViewsProvider viewsProvider) {
+            IInventoryViewProvider inventoryViewProvider) {
             _stateMachine = stateMachine;
             _inventoryService = inventoryService;
-            _viewsProvider = viewsProvider;
+            _inventoryViewProvider = inventoryViewProvider;
         }
         
         public void Enter() {
-            _viewsProvider.InventoryView.BindData(_inventoryService.Data);
+            _inventoryViewProvider.InventoryView.BindData(_inventoryService.Data);
             _stateMachine.Enter<ObjectSpawningState>();
         }
     }
