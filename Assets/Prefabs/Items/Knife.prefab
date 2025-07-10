@@ -8,26 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1320001800877800542, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1320001800877800542, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 1320001800877800542, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1320001800877800542, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
-      propertyPath: m_Color.g
-      value: 0.42376503
-      objectReference: {fileID: 0}
-    - target: {fileID: 1320001800877800542, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
-      propertyPath: m_Color.r
-      value: 0.33018857
-      objectReference: {fileID: 0}
     - target: {fileID: 2145739662854183466, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
       propertyPath: _size.x
       value: 2
@@ -58,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658295210004925781, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 380
       objectReference: {fileID: 0}
     - target: {fileID: 2658295210004925781, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2658295210004925781, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -93,14 +73,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2658295210004925781, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 860.2149
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658295210004925781, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 521.27563
-      objectReference: {fileID: 0}
-    - target: {fileID: 2658295210004925781, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -114,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5080229085152276985, guid: b1be2679237e57b4c85f8dfc0d56c0a6, type: 3}
       propertyPath: m_Name
-      value: Medium Item
+      value: Knife
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
