@@ -14,25 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.SObjects.GameConfig
   <Inventory>k__BackingField:
     _spawnInfo:
-      _size: {x: 5, y: 4}
+      _size: {x: 4, y: 4}
       _slots:
-      - <State>k__BackingField: 1
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
-      - <State>k__BackingField: 1
-      - <State>k__BackingField: 1
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
-      - <State>k__BackingField: 1
+      - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 1
-      - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 0
       - <State>k__BackingField: 1
