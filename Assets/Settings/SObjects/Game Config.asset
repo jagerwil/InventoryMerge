@@ -40,6 +40,8 @@ MonoBehaviour:
     _items:
     - <Id>k__BackingField: 0
       <Level>k__BackingField: 0
+    - <Id>k__BackingField: 0
+      <Level>k__BackingField: 0
     - <Id>k__BackingField: 1
       <Level>k__BackingField: 0
     - <Id>k__BackingField: 2

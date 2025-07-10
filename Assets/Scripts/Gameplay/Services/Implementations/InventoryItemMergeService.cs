@@ -15,7 +15,11 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         }
         
         public bool CanMerge(IInventoryItemData item, IInventoryItemData other) {
-            if (item.Id != other.Id || item.Level != other.Level) {
+            if (item == null || other == null) {
+                return false;
+            }
+
+            if (item.Id != other.Id || item.Level.CurrentValue != other.Level.CurrentValue) {
                 return false;
             }
 

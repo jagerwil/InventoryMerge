@@ -54,7 +54,7 @@ namespace InventoryMerge.SObjects.Databases {
         [SerializeField] private InventorySlotsDataContainerSpawnInfo _spawnInfo;
         [SerializeField] private List<InventoryItemLevelsInfo> _levels;
         
-        public InventorySlotsDataContainer ItemSlots => _spawnInfo.GetOrCreateInstance();
+        public InventorySlotsDataContainer ItemSlots => _spawnInfo.CreateInstance();
         public IReadOnlyList<InventoryItemLevelsInfo> Levels => _levels;
     }
 

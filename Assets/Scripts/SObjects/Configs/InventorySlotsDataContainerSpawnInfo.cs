@@ -12,11 +12,8 @@ namespace InventoryMerge.SObjects.Configs {
         
         [NonSerialized] private InventorySlotsDataContainer _dataContainer;
 
-        public InventorySlotsDataContainer GetOrCreateInstance() {
-            if (_dataContainer == null) {
-                _dataContainer = new InventorySlotsDataContainer(_size, _slots);
-            }
-            return _dataContainer;
+        public InventorySlotsDataContainer CreateInstance() {
+            return new InventorySlotsDataContainer(_size, _slots);
         }
     }
 

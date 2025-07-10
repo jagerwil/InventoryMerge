@@ -27,7 +27,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             roundedSlotIndex.y = RoundItemCenterIndex(lerpSlotIndex.y, itemCenterIndex.y);
 
             if (_inventoryService.TryMergeItem(item.Data, roundedSlotIndex)) {
-                return false;
+                return true;
             }
 
             if (!_inventoryService.TryFitItem(item.Data, roundedSlotIndex, out var removedItems)) {

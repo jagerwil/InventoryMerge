@@ -7,6 +7,6 @@ namespace InventoryMerge.SObjects.Configs {
     public class InventoryConfig {
         [SerializeField] private InventorySlotsDataContainerSpawnInfo _spawnInfo;
         
-        public InventorySlotsDataContainer DataContainer => _spawnInfo.GetOrCreateInstance();
+        public InventorySlotsDataContainer DataContainer => _spawnInfo.CreateInstance();
     }
 }

@@ -26,11 +26,12 @@ namespace InventoryMerge.Utils.ObjectPool {
 
             var newObject = _objectResolver.Instantiate(_prefab, parent ? parent : _defaultParent);
             newObject.OnDespawned += () => Despawn(newObject);
-            return _objectResolver.Instantiate(_prefab, parent ? parent : _defaultParent);
+            return newObject;
         }
 
         public void Despawn(T obj) {
             obj.gameObject.SetActive(false);
+            obj.transform.SetParent(_defaultParent);
             _inactiveItems.Enqueue(obj);
         }
     }
