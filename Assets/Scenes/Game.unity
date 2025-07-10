@@ -244,8 +244,9 @@ GameObject:
   - component: {fileID: 457611146}
   - component: {fileID: 457611147}
   - component: {fileID: 457611148}
+  - component: {fileID: 457611149}
   m_Layer: 0
-  m_Name: '[DI]'
+  m_Name: '[Initialization]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,6 +301,19 @@ MonoBehaviour:
   _defaultItemsRoot: {fileID: 696807825}
   _itemsHolderRoot: {fileID: 1514225114}
   _dragDropItemRoot: {fileID: 129421069}
+--- !u!114 &457611149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457611145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443a5281b18c3e2459656cbab5472a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.FramerateSetter
+  _targetFramerate: 60
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
