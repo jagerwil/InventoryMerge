@@ -40,12 +40,13 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             roundedSlotIndex.x = RoundItemCenterIndex(approxSlotIndex.x, itemCenterIndex.x);
             roundedSlotIndex.y = RoundItemCenterIndex(approxSlotIndex.y, itemCenterIndex.y);
 
-            if (_inventoryService.TryMergeItem(item.Data, roundedSlotIndex)) {
-                return true;
+            var result = _inventoryService.TryPlaceItem(item.Data, roundedSlotIndex, out var removedItems);
+            if (result == InventoryItemPlacementResultType.NoResult) {
+                return false;
             }
 
-            if (!_inventoryService.TryPlaceItem(item.Data, roundedSlotIndex, out var removedItems)) {
-                return false;
+            if (result == InventoryItemPlacementResultType.MergeItem) {
+                return true;
             }
 
             foreach (var removedItem in removedItems) {

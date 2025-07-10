@@ -8,13 +8,12 @@ namespace InventoryMerge.Gameplay.Services {
 
         public InventoryItemPlacementResultType GetItemPlacementResult(IInventoryItemData item, Vector2 approxSlotIndex);
 
-        public bool TryPlaceItem(IInventoryItemData item, Vector2 approxSlotIndex, out IEnumerable<IInventoryItemData> removedItems);
-        public bool TryMergeItem(IInventoryItemData item, Vector2 approxSlotIndex);
+        public InventoryItemPlacementResultType TryPlaceItem(IInventoryItemData item, Vector2 approxSlotIndex, out IEnumerable<IInventoryItemData> removedItems);
         public bool TryRemoveItem(IInventoryItemData item);
     }
 
     public enum InventoryItemPlacementResultType {
-        PlaceItem = 0,
+        FitItem = 0,
         MergeItem = 1,
         NoResult = 2,
     }

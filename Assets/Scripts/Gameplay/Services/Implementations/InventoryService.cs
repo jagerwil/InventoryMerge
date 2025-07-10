@@ -23,31 +23,31 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                 return InventoryItemPlacementResultType.MergeItem;
             }
 
-            if (CanPlaceItem(item, approxSlotIndex)) {
-                return InventoryItemPlacementResultType.PlaceItem;
+            if (CanFitItem(item, approxSlotIndex)) {
+                return InventoryItemPlacementResultType.FitItem;
             }
             
             return InventoryItemPlacementResultType.NoResult;
         }
 
-        public bool TryPlaceItem(IInventoryItemData item, Vector2 approxSlotIndex, 
-            out IEnumerable<IInventoryItemData> removedItems) {
-            var startingIndex = item.GetStartIndex(approxSlotIndex);
-            return _inventoryData.TryFitItem(item, startingIndex, out removedItems);
-        }
+        public InventoryItemPlacementResultType TryPlaceItem(IInventoryItemData item, Vector2 approxSlotIndex, out IEnumerable<IInventoryItemData> removedItems) {
+            if (TryMergeItem(item, approxSlotIndex)) {
+                removedItems = null;
+                return InventoryItemPlacementResultType.MergeItem;
+            }
 
-        public bool TryMergeItem(IInventoryItemData item, Vector2 approxSlotIndex) {
-            var slotIndex = approxSlotIndex.RoundToInt();
-            var slotItem = _inventoryData.GetSlot(slotIndex).Item.CurrentValue;
-
-            return _itemMergeService.TryMerge(slotItem, item);
+            if (TryFitItem(item, approxSlotIndex, out removedItems)) {
+                return InventoryItemPlacementResultType.FitItem;
+            }
+            
+            return InventoryItemPlacementResultType.NoResult;
         }
 
         public bool TryRemoveItem(IInventoryItemData item) {
             return _inventoryData.TryRemoveItem(item);
         }
 
-        private bool CanPlaceItem(IInventoryItemData item, Vector2 approxSlotIndex) {
+        private bool CanFitItem(IInventoryItemData item, Vector2 approxSlotIndex) {
             var startingIndex = item.GetStartIndex(approxSlotIndex);
             return _inventoryData.CanFitItem(item, startingIndex);
         }
@@ -57,6 +57,19 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             var slotItem = _inventoryData.GetSlot(slotIndex).Item.CurrentValue;
 
             return _itemMergeService.CanMerge(slotItem, item);
+        }
+
+        private bool TryFitItem(IInventoryItemData item, Vector2 approxSlotIndex, 
+            out IEnumerable<IInventoryItemData> removedItems) {
+            var startingIndex = item.GetStartIndex(approxSlotIndex);
+            return _inventoryData.TryFitItem(item, startingIndex, out removedItems);
+        }
+
+        private bool TryMergeItem(IInventoryItemData item, Vector2 approxSlotIndex) {
+            var slotIndex = approxSlotIndex.RoundToInt();
+            var slotItem = _inventoryData.GetSlot(slotIndex).Item.CurrentValue;
+
+            return _itemMergeService.TryMerge(slotItem, item);
         }
     }
 }

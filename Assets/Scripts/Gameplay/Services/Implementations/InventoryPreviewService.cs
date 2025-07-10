@@ -93,7 +93,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
 
             var inventoryView = _inventoryViewProvider.InventoryView;
             switch (result) {
-                case InventoryItemPlacementResultType.PlaceItem:
+                case InventoryItemPlacementResultType.FitItem:
                     inventoryView.ShowItemPlacedPreview(item, item.GetStartIndex(approxSlotIndex));
                     break;
                 case InventoryItemPlacementResultType.MergeItem:
