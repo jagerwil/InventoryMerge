@@ -36,11 +36,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         public bool TryAttachToInventory(InventoryItemView item, Vector2 approxSlotIndex) {
             var itemCenterIndex = item.Data.CenterIndex;
 
-            var roundedSlotIndex = Vector2.zero;
-            roundedSlotIndex.x = RoundItemCenterIndex(approxSlotIndex.x, itemCenterIndex.x);
-            roundedSlotIndex.y = RoundItemCenterIndex(approxSlotIndex.y, itemCenterIndex.y);
-
-            var result = _inventoryService.TryPlaceItem(item.Data, roundedSlotIndex, out var removedItems);
+            var result = _inventoryService.TryPlaceItem(item.Data, approxSlotIndex, out var removedItems);
             if (result == InventoryItemPlacementResultType.NoResult) {
                 return false;
             }
@@ -55,6 +51,10 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                     AttachToHolder(itemView);
                 }
             }
+
+            var roundedSlotIndex = Vector2.zero;
+            roundedSlotIndex.x = RoundItemCenterIndex(approxSlotIndex.x, itemCenterIndex.x);
+            roundedSlotIndex.y = RoundItemCenterIndex(approxSlotIndex.y, itemCenterIndex.y);
 
             var inventoryView = _inventoryViewProvider.InventoryView;
             SetItemParent(item, _defaultItemsRoot, false);
