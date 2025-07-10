@@ -45,7 +45,6 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             }
 
             if (!_inventoryService.TryPlaceItem(item.Data, roundedSlotIndex, out var removedItems)) {
-                Debug.Log($"[ItemTransfer] ITEM NOT FIT! item size: {item.Data.Container.Size}, position: {roundedSlotIndex}");
                 return false;
             }
 

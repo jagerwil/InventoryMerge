@@ -10,8 +10,7 @@ namespace InventoryMerge.Utils.Data {
 
         protected void Initialize(Vector2Int size, Func<Vector2Int, T> createElementFunc) {
             Size = size;
-            Debug.Log($"Initialize {GetType().Name}: Size {size}");
-            
+
             for (int y = 0; y < Size.y; y++) {
                 for (int x = 0; x < Size.x; x++) {
                     _elements.Add(createElementFunc(new Vector2Int(x, y)));
