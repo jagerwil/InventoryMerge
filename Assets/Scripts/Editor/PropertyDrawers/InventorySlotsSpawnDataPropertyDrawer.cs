@@ -18,28 +18,28 @@ namespace InventoryMerge.Editor.PropertyDrawers {
         
         public override VisualElement CreatePropertyGUI(SerializedProperty property) {
             var rootElement = new VisualElement();
-
-            rootElement.TrackPropertyValue(property, (trackedProperty) => {
-                RedrawPropertyDrawer(rootElement, trackedProperty);
-            });
             
-            RedrawPropertyDrawer(rootElement, property);
+            var slotsProperty = property.FindPropertyRelative("_slots");
+            var sizeProperty = property.FindPropertyRelative("_size");
+            
+            var amountField = new PropertyField(sizeProperty);
+            var elementsField = new VisualElement();
+            rootElement.Add(amountField);
+            rootElement.Add(elementsField);
 
+            rootElement.TrackPropertyValue(property, (_) => {
+                RedrawPropertyDrawer(elementsField, slotsProperty, sizeProperty);
+            });
+
+            RedrawPropertyDrawer(elementsField, slotsProperty, sizeProperty);
             return rootElement;
         }
 
-        private void RedrawPropertyDrawer(VisualElement rootElement, SerializedProperty property) {
+        private void RedrawPropertyDrawer(VisualElement rootElement, SerializedProperty slotsProperty, SerializedProperty sizeProperty) {
             rootElement.Clear();
             
-            var sizeProperty = property.FindPropertyRelative("_size");
-            var slotsProperty = property.FindPropertyRelative("_slots");
-            
             var size = sizeProperty.vector2IntValue;
-            var amountField = new PropertyField(sizeProperty);
-            
-            rootElement.Add(amountField);
-            
-            //EditorGUI.BeginChangeCheck();
+
             slotsProperty.arraySize = size.x * size.y;
             try {
                 for (var y = size.y - 1; y >= 0; y--) {
@@ -58,7 +58,7 @@ namespace InventoryMerge.Editor.PropertyDrawers {
                 Debug.LogException(e);
             }
             
-            property.serializedObject.ApplyModifiedProperties();
+            slotsProperty.serializedObject.ApplyModifiedProperties();
         }
 
         private VisualElement CreateSlot(Vector2Int index, Vector2Int size, SerializedProperty slotsProperty) {
