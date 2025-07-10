@@ -44,7 +44,6 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                 return;
             }
             
-            _itemTransferService.TryDetachFromCurrentPlacement(_selectedItem);
             _itemTransferService.AttachToDragDrop(_selectedItem);
             _moveUiWithTouchService.Attach(_selectedItem.transform);
         }

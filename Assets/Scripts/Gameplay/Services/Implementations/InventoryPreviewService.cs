@@ -14,7 +14,6 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         private readonly IInventoryViewProvider _inventoryViewProvider;
         
         private InventoryItemView _selectedItem;
-        private InventorySlotView _selectedSlot;
         
         private bool _isPreviewing;
 
@@ -54,12 +53,10 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         }
 
         private void TapEnded(Vector2 touchPosition) {
-            _selectedSlot = null;
             StopPreview();
         }
 
         private void TapCancelled() {
-            _selectedSlot = null;
             StopPreview();
         }
 
@@ -73,18 +70,13 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             }
 
             var slot = UiRaycaster.RaycastAny<InventorySlotView>(touchPosition);
-            if (slot == _selectedSlot) {
-                return;
-            }
-            _selectedSlot = slot;
-            
-            if (!_selectedSlot) {
+            if (!slot) {
                 StopPreview();
                 return;
             }
 
-            var approxIndex = _selectedSlot.GetApproxIndex(touchPosition);
-            StartPreview(_selectedItem.Data, approxIndex, _selectedSlot.Item);
+            var approxIndex = slot.GetApproxIndex(touchPosition);
+            StartPreview(_selectedItem.Data, approxIndex, slot.Item);
         }
 
         private void StopPreview() {

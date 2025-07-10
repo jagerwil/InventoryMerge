@@ -30,7 +30,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         }
 
         public void AttachToDragDrop(InventoryItemView item) {
-            item.transform.SetParent(_dragDropItemsRoot);
+            SetItemParent(item, _dragDropItemsRoot);
         }
 
         public bool TryAttachToInventory(InventoryItemView item, Vector2 approxSlotIndex) {
@@ -57,12 +57,13 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             }
 
             var inventoryView = _inventoryViewProvider.InventoryView;
+            SetItemParent(item, _defaultItemsRoot, false);
             item.transform.position = inventoryView.GetSlotPosition(roundedSlotIndex);
             return true;
         }
 
         public void AttachToHolder(InventoryItemView item) {
-            item.transform.SetParent(_itemsHolderRoot);
+            SetItemParent(item, _itemsHolderRoot);
             item.transform.localPosition = Vector3.zero;
         }
 
@@ -71,9 +72,15 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                 return false;
             }
 
-            item.transform.SetParent(_defaultItemsRoot);
-            _inventoryService.TryRemoveItem(item.Data);
+            SetItemParent(item, _defaultItemsRoot);
             return true;
+        }
+
+        private void SetItemParent(InventoryItemView item, Transform parent, bool removeItemFromInventory = true) {
+            item.transform.SetParent(parent);
+            if (removeItemFromInventory) {
+                _inventoryService.TryRemoveItem(item.Data);
+            }
         }
 
         private float RoundItemCenterIndex(float approxIndex, float itemCenterIndex) {
