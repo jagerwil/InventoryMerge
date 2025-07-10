@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using InventoryMerge.Gameplay.Providers;
 using UnityEngine;
+using VContainer;
 
 namespace InventoryMerge.Gameplay.Services.Implementations {
     public class MoveUiWithTouchService : IMoveUiWithTouchService, IDisposable {
         private readonly HashSet<Transform> _objects = new();
-        
-        private readonly ICameraProvider _cameraProvider;
+
         private readonly IInputService _inputService;
         
-        public MoveUiWithTouchService(ICameraProvider cameraProvider, IInputService inputService) {
-            _cameraProvider = cameraProvider;
+        [Inject]
+        public MoveUiWithTouchService(IInputService inputService) {
             _inputService = inputService;
             _inputService.OnTouchPositionChanged += TouchPositionChanged;
         }

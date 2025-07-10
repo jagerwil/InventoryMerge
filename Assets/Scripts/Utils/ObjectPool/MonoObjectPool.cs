@@ -3,8 +3,8 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace InventoryMerge.Utils.Factory {
-    public class MonoObjectPool<T> where T : MonoBehaviour {
+namespace InventoryMerge.Utils.ObjectPool {
+    public class MonoObjectPool<T> where T : MonoPoolObject {
         private readonly Queue<T> _inactiveItems = new();
         
         private readonly T _prefab;
@@ -23,7 +23,9 @@ namespace InventoryMerge.Utils.Factory {
                 obj.gameObject.SetActive(true);
                 return obj;
             }
-            
+
+            var newObject = _objectResolver.Instantiate(_prefab, parent ? parent : _defaultParent);
+            newObject.OnDespawned += () => Despawn(newObject);
             return _objectResolver.Instantiate(_prefab, parent ? parent : _defaultParent);
         }
 

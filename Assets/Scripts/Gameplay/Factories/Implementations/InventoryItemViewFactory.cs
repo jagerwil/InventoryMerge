@@ -4,11 +4,11 @@ using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Services;
 using InventoryMerge.Gameplay.Views.Inventory;
 using InventoryMerge.SObjects.Databases;
-using InventoryMerge.Utils.Factory;
+using InventoryMerge.Utils.ObjectPool;
 using UnityEngine;
 using VContainer;
 
-namespace InventoryMerge.Gameplay.Factories {
+namespace InventoryMerge.Gameplay.Factories.Implementations {
     public class InventoryItemViewFactory : IInventoryItemViewFactory {
         private readonly IInventoryItemViewsProvider _itemViewsProvider;
         private readonly IInventoryItemTransferService _itemTransferService;

@@ -3,8 +3,8 @@ using JetBrains.Annotations;
 using UnityEngine;
 using VContainer;
 
-namespace InventoryMerge.Utils.Factory {
-    public class PrefabMonoObjectPool<TKey, TObject> where TObject : MonoBehaviour {
+namespace InventoryMerge.Utils.ObjectPool {
+    public class PrefabMonoObjectPool<TKey, TObject> where TObject : MonoPoolObject {
         private readonly Dictionary<TKey, MonoObjectPool<TObject>> _pools = new();
         
         private readonly Transform _defaultParent;

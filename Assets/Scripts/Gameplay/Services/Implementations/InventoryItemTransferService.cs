@@ -1,6 +1,7 @@
 using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Views.Inventory;
 using UnityEngine;
+using VContainer;
 
 namespace InventoryMerge.Gameplay.Services.Implementations {
     public class InventoryItemTransferService : IInventoryItemTransferService {
@@ -8,6 +9,7 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
         private readonly IViewsProvider _viewsProvider;
         private readonly IInventoryItemViewsProvider _itemViewsProvider;
 
+        [Inject]
         public InventoryItemTransferService(
             IInventoryService inventoryService,
             IViewsProvider viewsProvider,
@@ -23,6 +25,10 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             var roundedSlotIndex = Vector2.zero;
             roundedSlotIndex.x = RoundItemCenterIndex(lerpSlotIndex.x, itemCenterIndex.x);
             roundedSlotIndex.y = RoundItemCenterIndex(lerpSlotIndex.y, itemCenterIndex.y);
+
+            if (_inventoryService.TryMergeItem(item.Data, roundedSlotIndex)) {
+                return false;
+            }
 
             if (!_inventoryService.TryFitItem(item.Data, roundedSlotIndex, out var removedItems)) {
                 Debug.Log($"[ItemTransfer] ITEM NOT FIT! item size: {item.Data.Container.Size}, position: {roundedSlotIndex}");

@@ -1,10 +1,10 @@
 using InventoryMerge.Architecture.StateMachine;
 using InventoryMerge.Gameplay.Factories;
+using InventoryMerge.Gameplay.Factories.Implementations;
 using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Providers.Implementations;
 using InventoryMerge.Gameplay.Services;
 using InventoryMerge.Gameplay.Services.Implementations;
-using InventoryMerge.Gameplay.Views.Inventory;
 using InventoryMerge.SObjects;
 using UnityEngine;
 using VContainer;
@@ -32,6 +32,7 @@ namespace InventoryMerge.Architecture.DI {
             //Register services
             builder.Register<IInputService, InputService>(Lifetime.Singleton);
             builder.Register<IInventoryService, InventoryService>(Lifetime.Singleton);
+            builder.Register<IInventoryItemMergeService, InventoryItemMergeService>(Lifetime.Singleton);
             builder.Register<IInventoryDragDropService, InventoryDragDropService>(Lifetime.Singleton);
             builder.Register<IInventoryItemTransferService, InventoryItemTransferService>(Lifetime.Singleton);
             builder.Register<IMoveUiWithTouchService, MoveUiWithTouchService>(Lifetime.Singleton);
