@@ -21,7 +21,16 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
             
             CenterIndex = (container.Size - Vector2.one) * 0.5f;
         }
-        
+
+        public Vector2Int GetStartIndex(Vector2 approxSlotIndex) {
+            var approxStartingIndex = approxSlotIndex - CenterIndex;
+            return new Vector2Int(Mathf.RoundToInt(approxStartingIndex.x), Mathf.RoundToInt(approxStartingIndex.y));
+        }
+
+        public Vector2Int GetEndIndex(Vector2Int startingSlot) {
+            return startingSlot + Container.Size - Vector2Int.one;
+        }
+
         public void IncreaseLevel() {
             _level.Value += 1;
         }

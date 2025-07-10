@@ -8,5 +8,8 @@ namespace InventoryMerge.Gameplay.Services {
         public event Action OnTapCanceled;
 
         public event Action<Vector2> OnTouchPositionChanged;
+
+        public void Enable();
+        public void Disable();
     }
 }

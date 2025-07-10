@@ -29,6 +29,7 @@ namespace InventoryMerge.Architecture.DI {
             stateMachine.Register(objectResolver.InjectNewObject<InitializationState>());
             stateMachine.Register(objectResolver.InjectNewObject<DataBindingState>());
             stateMachine.Register(objectResolver.InjectNewObject<ObjectSpawningState>());
+            stateMachine.Register(objectResolver.InjectNewObject<GameplayState>());
             
             stateMachine.Enter<InitializationState>();
         }

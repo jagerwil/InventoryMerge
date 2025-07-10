@@ -36,6 +36,7 @@ namespace InventoryMerge.Architecture.DI {
             builder.Register<IInventoryDragDropService, InventoryDragDropService>(Lifetime.Singleton);
             builder.Register<IInventoryItemTransferService, InventoryItemTransferService>(Lifetime.Singleton);
             builder.Register<IMoveUiWithTouchService, MoveUiWithTouchService>(Lifetime.Singleton);
+            builder.Register<IInventoryPreviewService, InventoryPreviewService>(Lifetime.Singleton);
 
             //Register state machine
             builder.Register<IGameStateMachine, GameStateMachine>(Lifetime.Singleton);

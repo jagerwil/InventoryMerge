@@ -19,13 +19,19 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             _inputService = inputService;
             _itemTransferService = itemTransferService;
             _moveUiWithTouchService = moveUiWithTouchService;
-            
+        }
+
+        public void Dispose() {
+            Disable();
+        }
+
+        public void Enable() {
             _inputService.OnTapStarted += TapStarted;
             _inputService.OnTapEnded += TapEnded;
             _inputService.OnTapCanceled += TapCanceled;
         }
 
-        public void Dispose() {
+        public void Disable() {
             _inputService.OnTapStarted -= TapStarted;
             _inputService.OnTapEnded -= TapEnded;
             _inputService.OnTapCanceled -= TapCanceled;
@@ -52,9 +58,9 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
                 return;
             }
             
-            var slotOffset = slot.GetCenterOffsetRatio(touchPosition);
+            var approxIndex = slot.GetApproxIndex(touchPosition);
             _moveUiWithTouchService.Detach(_selectedItem.transform);
-            if (!_itemTransferService.TryAttachToInventory(_selectedItem, slot.Index + slotOffset)) {
+            if (!_itemTransferService.TryAttachToInventory(_selectedItem, approxIndex)) {
                 _itemTransferService.AttachToHolder(_selectedItem);
             }
             _selectedItem = null;

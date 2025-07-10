@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 384920827799713573}
+  - component: {fileID: 4752409687705205641}
+  - component: {fileID: 5643220300681875142}
   m_Layer: 5
   m_Name: Item Place
   m_TagString: Untagged
@@ -30,11 +32,49 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4021759559323727344}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -10, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4752409687705205641
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893999078520178426}
+  m_CullTransparentMesh: 1
+--- !u!114 &5643220300681875142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893999078520178426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6210433064419116714
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +87,7 @@ GameObject:
   - component: {fileID: 8691037350869299779}
   - component: {fileID: 6528494320143551080}
   - component: {fileID: 4102433367215840605}
+  - component: {fileID: 3226335771063340512}
   m_Layer: 5
   m_Name: Inventory Slot
   m_TagString: Untagged
@@ -69,10 +110,10 @@ RectTransform:
   - {fileID: 384920827799713573}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -960, y: -540}
+  m_SizeDelta: {x: 15, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8691037350869299779
 CanvasRenderer:
@@ -95,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -124,8 +165,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21a1aad2b55059488e271c69abe23cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.Gameplay.Views.InventorySlotView
-  _image: {fileID: 6528494320143551080}
-  _itemPlace: {fileID: 0}
-  _freeSlotColor: {r: 0.5264151, g: 1, b: 0.5282723, a: 1}
-  _occupiedSlotColor: {r: 1, g: 0.4433962, b: 0.4433962, a: 1}
+  _image: {fileID: 5643220300681875142}
+  _itemPlace: {fileID: 384920827799713573}
+  _colorChanger: {fileID: 3226335771063340512}
+--- !u!114 &3226335771063340512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210433064419116714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2ca29a8108e83408b487559fa50e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryMerge.Gameplay.Views.Inventory.InventorySlotViewColorChanger
+  _image: {fileID: 5643220300681875142}
+  _defaultSlotColor: {r: 1, g: 1, b: 1, a: 1}
   _disabledSlotColor: {r: 1, g: 1, b: 1, a: 0}
+  _previewColors:
+  - <State>k__BackingField: 0
+    <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  - <State>k__BackingField: 1
+    <Color>k__BackingField: {r: 0.4576561, g: 0.87169814, b: 0.42598078, a: 1}
+  - <State>k__BackingField: 2
+    <Color>k__BackingField: {r: 0.87058824, g: 0.44919947, b: 0.42745098, a: 1}
+  - <State>k__BackingField: 3
+    <Color>k__BackingField: {r: 0.9098039, g: 0.84815353, b: 0.35686272, a: 1}
+  - <State>k__BackingField: 4
+    <Color>k__BackingField: {r: 0.4305233, g: 0.48582035, b: 0.9547169, a: 1}

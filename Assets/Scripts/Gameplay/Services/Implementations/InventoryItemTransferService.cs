@@ -19,18 +19,18 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             _itemViewsProvider = itemViewsProvider;
         }
 
-        public bool TryAttachToInventory(InventoryItemView item, Vector2 lerpSlotIndex) {
+        public bool TryAttachToInventory(InventoryItemView item, Vector2 approxSlotIndex) {
             var itemCenterIndex = item.Data.CenterIndex;
 
             var roundedSlotIndex = Vector2.zero;
-            roundedSlotIndex.x = RoundItemCenterIndex(lerpSlotIndex.x, itemCenterIndex.x);
-            roundedSlotIndex.y = RoundItemCenterIndex(lerpSlotIndex.y, itemCenterIndex.y);
+            roundedSlotIndex.x = RoundItemCenterIndex(approxSlotIndex.x, itemCenterIndex.x);
+            roundedSlotIndex.y = RoundItemCenterIndex(approxSlotIndex.y, itemCenterIndex.y);
 
             if (_inventoryService.TryMergeItem(item.Data, roundedSlotIndex)) {
                 return true;
             }
 
-            if (!_inventoryService.TryFitItem(item.Data, roundedSlotIndex, out var removedItems)) {
+            if (!_inventoryService.TryPlaceItem(item.Data, roundedSlotIndex, out var removedItems)) {
                 Debug.Log($"[ItemTransfer] ITEM NOT FIT! item size: {item.Data.Container.Size}, position: {roundedSlotIndex}");
                 return false;
             }
@@ -61,12 +61,12 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             return true;
         }
 
-        private float RoundItemCenterIndex(float lerpIndex, float itemCenterIndex) {
+        private float RoundItemCenterIndex(float approxIndex, float itemCenterIndex) {
             if (Mathf.Approximately(itemCenterIndex, Mathf.Round(itemCenterIndex))) {
-                return Mathf.Round(lerpIndex);
+                return Mathf.Round(approxIndex);
             }
             
-            return Mathf.Round(lerpIndex + 0.5f) - 0.5f;
+            return Mathf.Round(approxIndex + 0.5f) - 0.5f;
         }
     }
 }

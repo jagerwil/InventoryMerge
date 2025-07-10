@@ -1,6 +1,6 @@
 
 namespace InventoryMerge.Gameplay.Services {
-    public interface IInventoryDragDropService {
+    public interface IInventoryPreviewService {
         public void Enable();
         public void Disable();
     }

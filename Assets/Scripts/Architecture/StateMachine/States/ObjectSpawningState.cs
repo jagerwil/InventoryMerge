@@ -23,6 +23,8 @@ namespace InventoryMerge.Architecture.StateMachine.States {
             foreach (var item in items) {
                 _itemViewFactory.Spawn(item.Id, item.Level);
             }
+            
+            _stateMachine.Enter<GameplayState>();
         }
     }
 }

@@ -20,12 +20,19 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             _input = new PlayerInput();
             _input.Player.TouchPosition.performed += TouchPositionChanged;
             _input.Player.TouchPhase.performed += TouchPhaseChanged;
-            _input.Enable();
         }
 
         public void Dispose() {
-            _input.Disable();
+            Disable();
             _input?.Dispose();
+        }
+
+        public void Enable() {
+            _input.Enable();
+        }
+        
+        public void Disable() {
+            _input.Disable();
         }
 
         private void TouchPhaseChanged(InputAction.CallbackContext ctx) {

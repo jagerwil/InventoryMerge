@@ -11,10 +11,14 @@ namespace InventoryMerge.Gameplay.Data.Implementations {
             _container = container;
         }
 
-        public InventorySlotData GetSlot(Vector2Int index) {
+        public IInventorySlotData GetSlot(Vector2Int index) {
             return _container.GetElement(index);
         }
-        
+
+        public IEnumerable<IInventorySlotData> GetSlots() {
+            return _container.GetSlots();
+        }
+
         public bool CanFitItem(IInventoryItemData item, Vector2Int startingIndex) {
             return _container.CanFit(item.Container, startingIndex);
         }

@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using InventoryMerge.Gameplay.Services;
 using VContainer;
 
 namespace InventoryMerge.Architecture.StateMachine.States {
@@ -7,7 +6,8 @@ namespace InventoryMerge.Architecture.StateMachine.States {
         private IGameStateMachine _stateMachine;
         
         [Inject]
-        private void Inject(IGameStateMachine stateMachine, IInventoryDragDropService dragDropService) {
+        private void Inject(
+            IGameStateMachine stateMachine) {
             _stateMachine = stateMachine;
         }
         

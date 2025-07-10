@@ -18,18 +18,26 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             _inventoryData = new InventoryData(config.DataContainer);
         }
 
-        public bool CanFitItem(IInventoryItemData item, Vector2 lerpSlotIndex) {
-            var startingIndex = GetStartingIndex(item, lerpSlotIndex);
-            return _inventoryData.CanFitItem(item, startingIndex);
+        public InventoryItemPlacementResultType GetItemPlacementResult(IInventoryItemData item, Vector2 approxSlotIndex) {
+            if (CanMergeItem(item, approxSlotIndex)) {
+                return InventoryItemPlacementResultType.MergeItem;
+            }
+
+            if (CanPlaceItem(item, approxSlotIndex)) {
+                return InventoryItemPlacementResultType.PlaceItem;
+            }
+            
+            return InventoryItemPlacementResultType.NoResult;
         }
 
-        public bool TryFitItem(IInventoryItemData item, Vector2 lerpSlotIndex, out IEnumerable<IInventoryItemData> removedItems) {
-            var startingIndex = GetStartingIndex(item, lerpSlotIndex);
+        public bool TryPlaceItem(IInventoryItemData item, Vector2 approxSlotIndex, 
+            out IEnumerable<IInventoryItemData> removedItems) {
+            var startingIndex = item.GetStartIndex(approxSlotIndex);
             return _inventoryData.TryFitItem(item, startingIndex, out removedItems);
         }
 
-        public bool TryMergeItem(IInventoryItemData item, Vector2 lerpSlotIndex) {
-            var slotIndex = new Vector2Int(Mathf.RoundToInt(lerpSlotIndex.x), Mathf.RoundToInt(lerpSlotIndex.y));
+        public bool TryMergeItem(IInventoryItemData item, Vector2 approxSlotIndex) {
+            var slotIndex = approxSlotIndex.RoundToInt();
             var slotItem = _inventoryData.GetSlot(slotIndex).Item.CurrentValue;
 
             return _itemMergeService.TryMerge(slotItem, item);
@@ -39,9 +47,16 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
             return _inventoryData.TryRemoveItem(item);
         }
 
-        private Vector2Int GetStartingIndex(IInventoryItemData item, Vector2 lerpSlotIndex) {
-            var lerpStartingIndex = lerpSlotIndex - item.CenterIndex;
-            return new Vector2Int(Mathf.RoundToInt(lerpStartingIndex.x), Mathf.RoundToInt(lerpStartingIndex.y));
+        private bool CanPlaceItem(IInventoryItemData item, Vector2 approxSlotIndex) {
+            var startingIndex = item.GetStartIndex(approxSlotIndex);
+            return _inventoryData.CanFitItem(item, startingIndex);
+        }
+
+        private bool CanMergeItem(IInventoryItemData item, Vector2 approxSlotIndex) {
+            var slotIndex = approxSlotIndex.RoundToInt();
+            var slotItem = _inventoryData.GetSlot(slotIndex).Item.CurrentValue;
+
+            return _itemMergeService.CanMerge(slotItem, item);
         }
     }
 }
