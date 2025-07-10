@@ -4,10 +4,10 @@ using InventoryMerge.Gameplay.Views.Inventory;
 
 namespace InventoryMerge.Gameplay.Providers.Implementations {
     public class InventoryItemViewsProvider : IInventoryItemViewsProvider {
-        private Dictionary<IInventoryItemData, InventoryItemView> _itemViews = new();
+        private readonly Dictionary<IInventoryItemData, InventoryItemView> _itemViews = new();
         
         public void Register(InventoryItemView itemView) {
-            _itemViews.Add(itemView.Data, itemView);
+            _itemViews.TryAdd(itemView.Data, itemView);
         }
         
         public InventoryItemView GetItemView(IInventoryItemData data) {

@@ -1,5 +1,6 @@
 using InventoryMerge.Gameplay.Data;
 using InventoryMerge.Gameplay.Data.Implementations;
+using InventoryMerge.Gameplay.Providers;
 using InventoryMerge.Gameplay.Services;
 using InventoryMerge.Gameplay.Views.Inventory;
 using InventoryMerge.SObjects.Databases;
@@ -9,13 +10,17 @@ using VContainer;
 
 namespace InventoryMerge.Gameplay.Factories {
     public class InventoryItemViewFactory : IInventoryItemViewFactory {
+        private readonly IInventoryItemViewsProvider _itemViewsProvider;
         private readonly IInventoryItemTransferService _itemTransferService;
         private readonly InventoryItemsDatabase _itemsDatabase;
         
         private PrefabMonoObjectPool<InventoryItemId, InventoryItemView> _prefabPool;
 
         [Inject]
-        public InventoryItemViewFactory(IInventoryItemTransferService itemTransferService, InventoryItemsDatabase itemsDatabase) {
+        public InventoryItemViewFactory(IInventoryItemViewsProvider itemViewsProvider,
+            IInventoryItemTransferService itemTransferService, 
+            InventoryItemsDatabase itemsDatabase) {
+            _itemViewsProvider = itemViewsProvider;
             _itemTransferService = itemTransferService;
             _itemsDatabase = itemsDatabase;
         }
@@ -41,6 +46,7 @@ namespace InventoryMerge.Gameplay.Factories {
             var itemData = new InventoryItemData(id, level, itemInfo.ItemSlots);
             obj.Initialize(itemData);
             
+            _itemViewsProvider.Register(obj);
             _itemTransferService.AttachToHolder(obj);
             return obj;
         }
