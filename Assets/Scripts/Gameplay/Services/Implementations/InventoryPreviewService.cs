@@ -48,15 +48,16 @@ namespace InventoryMerge.Gameplay.Services.Implementations {
 
         private void TapStarted(Vector2 touchPosition) {
             _selectedItem = UiRaycaster.RaycastFirst<InventoryItemView>(touchPosition);
-            
             TryShowPreview(touchPosition);
         }
 
         private void TapEnded(Vector2 touchPosition) {
+            _selectedItem = null;
             StopPreview();
         }
 
         private void TapCancelled() {
+            _selectedItem = null;
             StopPreview();
         }
 
